@@ -52,6 +52,15 @@ db.messages["TankController"].signals["TankTemperature"].update(80);
 db.send("TankController");
 ```
 
+Added changes compared to original source
+-------
+
+#### Extended the multiplexing options:
+
+Multiplex definition in the .kcd file now can have a length in bits and an endianess. This means that multiplexing can be done over multiple bytes in a message.
+
+This feature is very handy to filter CANOpen multiplexed messages.
+
 Install
 -------
 

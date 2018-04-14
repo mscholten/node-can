@@ -83,6 +83,15 @@ exports.parseKcdFile = function(file) {
 
 				var multiplex = d['Bus'][b]['Message'][m]['Multiplex'];
 
+				if (multiplex !== undefined ) {
+					var mlength = multiplex[0]['$']['length'] ? parseInt(multiplex[0]['$']['length']) : 1;
+					var mend = multiplex[0]['$']['endianess'] ? multiplex[0]['$']['endianess'] : 'little';
+				}
+				else {
+					mlength = 0;
+					mend = 'little';
+				}
+
 				var _m = {
 					name: message.name,
 					id: parseInt(message.id, 16),
@@ -91,6 +100,8 @@ exports.parseKcdFile = function(file) {
 					length: message.length ? parseInt(message.length) : 0,
 					interval: message.interval ? parseInt(message.interval) : 0,
 					muxed : (multiplex != undefined ),
+					muxLength: mlength,
+					muxEndianess: mend
 				};
 
 				// Add messages going out and from whom.

@@ -213,6 +213,10 @@ function Message(desc)
 	 */
 	this.muxed = desc.muxed;
 
+	this.muxLength = desc.muxLength;
+
+	this.muxEndianess = desc.muxEndianess;
+
 	/**
          * Named array of signals within this message. Accessible via index and name.
          * @attribute {Signal} signals
@@ -280,7 +284,7 @@ DatabaseService.prototype.onMessage = function (msg) {
 	}
 
 	// this is the possible multiplexor for the signals coming in.
-	var b1mux = _signals.decode_signal(msg.data, 0, 8, true, false);
+	var b1mux = _signals.decode_signal(msg.data, 0, m.muxLength, m.muxEndianess == 'little', false);
 
 	// Let the C-Portition extract and convert the signal
 	for (i in m.signals) {
