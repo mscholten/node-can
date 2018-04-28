@@ -222,7 +222,7 @@ function Message(desc)
          * @attribute {Signal} signals
          * @final
          */
-	this.signals = [];
+	this.signals = {}; // Make it an object array
 
 	for (i in desc['signals']) {
 		var s = desc['signals'][i];
